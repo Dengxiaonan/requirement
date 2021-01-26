@@ -9,5 +9,5 @@ public interface CangKuService {
     List<CangKu> getAll();
     void addCang(CangKu cangKu);
     void updateCang(CangKu cangKu);
-    void  delCang(String uuuid);
+    void  delCang(String uuid);
 }
