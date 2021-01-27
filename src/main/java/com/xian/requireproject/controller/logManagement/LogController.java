@@ -22,7 +22,7 @@ public class LogController {
     @Resource
     LogService logService;
     @ApiOperation(value = "日志分页查询列表-条件", produces = "application/json")
-    @PostMapping(value = "/getLogList/{uuid}", produces = "application/json")
+    @GetMapping(value = "/getLogList")
     public JsonResult getLogList(@RequestParam(value = "login_name" , required = false) String loginname,
                                  @RequestParam(value = "details" , required = false) String details,
                                  @RequestParam(value = "operation_startime" , required = false) String startime,
