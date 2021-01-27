@@ -12,7 +12,6 @@ public class LogRequest {
     private String loginName;
     private String operation;
     private String ip;
-    private String describe;
     private String details;
 
 

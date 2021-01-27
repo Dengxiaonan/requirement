@@ -15,6 +15,7 @@ public interface LogService {
 
     //清空，也可以用状态，使它不显示
     void delLogInfo();
-
-
+/*
+   //记录登录日志
+    void saveLog();*/
 }

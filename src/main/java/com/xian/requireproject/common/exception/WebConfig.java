@@ -10,6 +10,9 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 @Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
 
@@ -41,6 +44,8 @@ public class WebConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
         super.addResourceHandlers(registry);
     }
+
+
 
 }
 

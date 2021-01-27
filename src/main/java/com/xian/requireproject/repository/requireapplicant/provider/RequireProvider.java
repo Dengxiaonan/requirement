@@ -192,23 +192,16 @@ public class RequireProvider extends SQL {
  */
 public String getLogList(LogRequest logRequest) {
     String s = new SQL() {{
-        SELECT("lm.uuid,lm.operation_time,lm.login_name,lm.operation,lm.ip,lm.describe,lm.details");
+        SELECT("lm.uuid,lm.operation_time,lm.login_name,lm.operation,lm.ip,lm.details");
         FROM("log_management lm");
         if (!StringUtils.isEmpty(logRequest.getLoginName())) {
-            WHERE("lm.system_module LIKE concat'%'#{systemModule}'%'");
-        }
-        if (!StringUtils.isEmpty(logRequest.getOperation())) {
-            WHERE("lm.operator LIKE concat'%'#{operator}'%'");
-        }
-        if (!StringUtils.isEmpty(logRequest.getIp())) {
-            WHERE("lm.operation_type LIKE concat'%'#{operationType}");
-        }
-        if (!StringUtils.isEmpty(logRequest.getDescribe())) {
-            WHERE("lm.operation_status LIKE concat'%'#{operationStatus}");
+            WHERE("lm.login_name LIKE concat'%'#{loginName}'%'");
         }
         if (!StringUtils.isEmpty(logRequest.getDetails())) {
-            WHERE("lm.operation_date LIKE concat'%'#{operationDate}");
+            WHERE("lm.details LIKE concat'%'#{details}");
         }
+
+
     }}.toString();
     System.out.println(s);
     return s;

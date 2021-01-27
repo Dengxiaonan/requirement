@@ -16,41 +16,23 @@ public class StoreManagementController {
     @Resource
     StoreManagementService storeManagementService;
 
-    @ApiOperation(value = "新增仓库", produces = "application/json")
-    @PostMapping("/addStoreManagement")
-    public JsonResult addStoreManagement(@RequestBody StoreManagementRequest storeManagementRequest) {
-      try {
 
-          return JsonResult.success(storeManagementService.addStoreManagement(storeManagementRequest));
-      }catch (Exception e){
-          return JsonResult.error("401","新增仓库错误");
-      }
-
-    }
 
     @ApiOperation(value = "删除", produces = "application/json")
-    @PostMapping("/delStoreManagement/{warehouse}")
-    public JsonResult delStoreManagement(@PathVariable("warehouse") String warehouse) {
+    @PostMapping("/delStoreManagement/{warehouse_id}")
+    public JsonResult delStoreManagement(@PathVariable("warehouse_id") String warehouse_id) {
 
-        storeManagementService.delStoreManagement(warehouse);
-
-        return JsonResult.success("OK");
-    }
-
-    @ApiOperation(value = "编辑", produces = "application/json")
-    @PostMapping("/updStoreManagement")
-    public JsonResult updStoreManagement(@RequestBody StoreManagementRequest storeManagementRequest) {
-
-        storeManagementService.updStoreManagement(storeManagementRequest);
+        storeManagementService.delStoreManagement(warehouse_id);
 
         return JsonResult.success("OK");
     }
+
 
     @ApiOperation(value = "查询列表", produces = "application/json")
-    @PostMapping(value = "/getUserList/{warehouse}", produces = "application/json")
-    public JsonResult getStoreManagementList(@PathVariable("warehouse") String warehouse) {
+    @PostMapping(value = "/getUserList/{warehouse_id}", produces = "application/json")
+    public JsonResult getStoreManagementList(@PathVariable("warehouse") String warehouse_id) {
 
-        return JsonResult.success(storeManagementService.getStoreManagementList(warehouse));
+        return JsonResult.success(storeManagementService.getStoreManagementList(warehouse_id));
     }
 
 }

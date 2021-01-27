@@ -6,8 +6,10 @@ import com.xian.requireproject.common.UseDetailsDTO;
 import com.xian.requireproject.common.exception.AuthCodeConstant;
 import com.xian.requireproject.common.redis.RedisUtil;
 import com.xian.requireproject.common.remind.JsonResult;
+import com.xian.requireproject.repository.logManagement.entity.LogEntity;
 import com.xian.requireproject.repository.sysuser.entity.SysUserEntity;
 import com.xian.requireproject.repository.sysuser.mapper.SysUserMapper;
+import com.xian.requireproject.service.logManagement.LogService;
 import com.xian.requireproject.service.sysuser.SysUserService;
 import com.xian.requireproject.service.sysuser.request.SysUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +36,14 @@ public class SysUserServiceImpl implements SysUserService {
     SysUserMapper sysUserMapper;
 
     @Resource
+    LogService logService;
+
+    @Resource
     RedisUtil redisUtil;
 
     @Resource
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private HttpServletRequest request;
 
     /**
      * @Author ldy
@@ -50,7 +53,7 @@ public class SysUserServiceImpl implements SysUserService {
      * @Return token
      **/
     @Override
-    public JsonResult userLogin(String userName, String password ) {
+    public JsonResult userLogin(String userName, String password ,HttpServletRequest request) {
 
         SysUserEntity sysUser = sysUserMapper.loginAuthentication(userName);
 
@@ -63,6 +66,11 @@ public class SysUserServiceImpl implements SysUserService {
         if (!passwordEncoder.matches(password, sysUser.getPassword())) {
             return JsonResult.error("101", "用户名密码不对");
         }
+        // 记录登录日志
+        /*LogEntity logEntity=new LogEntity();
+        logEntity.setIp();
+        logService.saveLog();*/
+
        // authCodeUtil.checkLog(sysUser.getUuid());
        // 此数据为拦截器一存入的数据
         //此数据为拦截器一存入的数据
@@ -73,12 +81,17 @@ public class SysUserServiceImpl implements SysUserService {
         useDetailsDTO.setAreaId(sysUser.getAreaId());
         //存储用户登录状态  是否在线
         redisUtil.set(AuthCodeConstant.AUTH_CODE_LOGIN_SAVE+sysUser.getUuid(),request.getHeader(AuthCodeConstant.AUTH_HEADER_KEY));
-        //存储radis  用户信息
+        //存储redis  用户信息
         redisUtil.set(AuthCodeConstant.AUTH_CODE_SAVE+request.getHeader(AuthCodeConstant.AUTH_HEADER_KEY), JSON.toJSONString(useDetailsDTO));
         //更新登陆时间
         return JsonResult.success(sysUser);
 
     }
+
+    /*@Override
+    public JsonResult userLogin(String userName, String password) {
+        return null;
+    }*/
 
     /**
      * @Author ldy

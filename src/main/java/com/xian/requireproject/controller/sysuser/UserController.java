@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xian.requireproject.common.AuthCodeUtil;
+import com.xian.requireproject.common.HttpUtil;
 import com.xian.requireproject.common.UseDetailsDTO;
 import com.xian.requireproject.common.UserUtil;
 import com.xian.requireproject.common.exception.AuthCodeConstant;
@@ -61,8 +62,10 @@ public class UserController {
 
     @ApiOperation(value = "登录", produces = "application/json")
     @PostMapping("/login")
-    public JsonResult userLogin(@RequestBody SysUserRequest sysUserRequest) {
-        JsonResult jsonResult = sysUserService.userLogin(sysUserRequest.getUserName(), sysUserRequest.getPassword());
+    public JsonResult userLogin(@RequestBody SysUserRequest sysUserRequest ,HttpServletRequest request) {
+        JsonResult jsonResult = sysUserService.userLogin(sysUserRequest.getUserName(), sysUserRequest.getPassword(),request);
+
+       // String userIP = HttpUtil.getRealIp(request);
         return jsonResult;
     }
 

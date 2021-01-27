@@ -5,6 +5,7 @@ import com.xian.requireproject.service.sysuser.request.SysUserRequest;
 import com.xian.requireproject.common.remind.JsonResult;
 import com.xian.requireproject.repository.sysuser.entity.SysUserEntity;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import java.util.Map;
 public interface SysUserService {
 
 //获取用户登录信息
-JsonResult userLogin(String userName, String password);
+JsonResult userLogin(String userName, String password, HttpServletRequest request);
 // 添加用户信息s
 void addSysUser(SysUserEntity sysUserEntity);
 // 修改用户信息

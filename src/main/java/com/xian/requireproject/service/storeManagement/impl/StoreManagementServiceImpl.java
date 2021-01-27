@@ -16,42 +16,15 @@ public class StoreManagementServiceImpl implements StoreManagementService {
 @Resource
     StoreManagementMapper storeManagementMapper;
 
-    @Override
-    public Object addStoreManagement(StoreManagementRequest storeManagementRequest) {
-        StoreManagementEntity storeManagementEntity = MapperUtils.mapperBean(storeManagementRequest, StoreManagementEntity.class);
-        storeManagementEntity.setUuid(UUIDUtils.getUUID());
-        storeManagementEntity.setWarehouse(storeManagementEntity.getWarehouse());
-        storeManagementEntity.setBrief(storeManagementEntity.getBrief());
-        storeManagementEntity.setWarehouseLocation(storeManagementEntity.getWarehouseLocation());
-        storeManagementEntity.setWarehouseType(storeManagementEntity.getWarehouseType());
-
-        storeManagementMapper.addStoreManagement(storeManagementEntity);
-        return storeManagementEntity;
+   //删除上传的仓库文件
+   @Override
+    public void delStoreManagement(String warehouse_files_id) {
+        storeManagementMapper.delStoreManagement(warehouse_files_id);
     }
-
+   //获取仓库信息
     @Override
-    public void updStoreManagement(StoreManagementRequest storeManagementRequest) {
-        StoreManagementEntity storeManagementEntity = MapperUtils.mapperBean(storeManagementRequest, StoreManagementEntity.class);
-
-        storeManagementEntity.setWarehouse(storeManagementEntity.getWarehouse());
-        storeManagementEntity.setResourceCategories(storeManagementEntity.getResourceCategories());
-        storeManagementEntity.setSystemNumber(storeManagementEntity.getSystemNumber());
-        storeManagementEntity.setBrief(storeManagementEntity.getBrief());
-        storeManagementEntity.setWarehouseLocation(storeManagementEntity.getWarehouseLocation());
-        storeManagementEntity.setWarehouseType(storeManagementEntity.getWarehouseType());
-        storeManagementMapper.updStoreManagement(storeManagementEntity);
-
-    }
-
-
-    @Override
-    public void delStoreManagement(String warehouse) {
-        storeManagementMapper.delStoreManagement(warehouse);
-    }
-
-    @Override
-    public Object getStoreManagementList(String warehouse) {
-        List<StoreManagementEntity> storeManagementList = storeManagementMapper.getStoreManagementList(warehouse);
+    public Object getStoreManagementList(String warehouse_id) {
+        List<StoreManagementEntity> storeManagementList = storeManagementMapper.getStoreManagementList(warehouse_id);
         return storeManagementList;
     }
 }
