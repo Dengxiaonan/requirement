@@ -17,15 +17,7 @@ public class LogServiceImpl implements LogService {
     @Resource
     LogMapper logMapper;
 
-    @Override
-    public Object getLogList(String uuid, int p, int c) {
 
-        Page<LogEntity> objects = PageHelper.startPage(p, c);
-        List<LogEntity> logList = logMapper.getLogList(uuid);
-        PageInfo<LogEntity> objectPageInfo = new PageInfo<>(logList);
-
-        return objectPageInfo;
-    }
 
     /*@Override
     public LogEntity getLogInfo(String uuid) {
@@ -34,8 +26,13 @@ public class LogServiceImpl implements LogService {
     }*/
 
     @Override
-    public void delLog(String uuid) {
-       logMapper.delLog(uuid);
+    public List<LogEntity> getLogList(LogEntity logEntity) {
+        return logMapper.getLogList(logEntity);
+    }
+
+    @Override
+    public void delLog(String logid) {
+       logMapper.delLog(logid);
     }
    //清空列表信息
     @Override

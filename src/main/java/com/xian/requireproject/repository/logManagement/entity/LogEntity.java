@@ -13,6 +13,8 @@ public class LogEntity {
     private String operation;
     private String ip;
     private String details;
+    private String startime;
+    private String endtime;
 
 
 }
