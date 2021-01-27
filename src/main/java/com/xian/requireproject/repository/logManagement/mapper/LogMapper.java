@@ -10,14 +10,14 @@ import java.util.List;
 
 @Mapper
 public interface LogMapper {
-    @Select("SELECT * FROM log_management o WHERE o.uuid = #{uuid}")
+    @Select("SELECT*FROM log_management o left join sys_user s on o.uuid = s.uuid")
     List<LogEntity> getLogList(@Param("uuid") String uuid);
 
     //详情
-    @Select("SELECT `uuid`,`log_number`,`system_module`,`operation_type`,`request_method`,`operator`," +
+    /*@Select("SELECT `uuid`,`log_number`,`system_module`,`operation_type`,`request_method`,`operator`," +
             " FROM log_management  WHERE uuid = #{uuid}")
 
-    LogEntity getLogInfo(@Param("uuid") String uuid);
+    LogEntity getLogInfo(@Param("uuid") String uuid);*/
 
     @Delete("delete from log_management WHERE uuid = #{uuid}")
     void delLog(@Param("uuid") String uuid);

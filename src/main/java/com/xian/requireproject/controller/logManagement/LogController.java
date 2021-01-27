@@ -20,11 +20,11 @@ public class LogController {
 
         return JsonResult.success(logService.getLogList(uuid,p,c));
     }
-    @ApiOperation(value="详情",produces = "application/json")
+    /*@ApiOperation(value="详情",produces = "application/json")
     @PostMapping("/getLogInfo/{uuid}")
     public JsonResult getLogInfo(@PathVariable("uuid") String uuid){
         return  JsonResult.success(logService.getLogInfo(uuid));
-    }
+    }*/
     @ApiOperation(value="删除",produces = "application/json" )
     @PostMapping("/delLog/{uuid}")
     public JsonResult delLog(@PathVariable("uuid") String uuid){

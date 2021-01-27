@@ -47,10 +47,10 @@ public class RequireprojectApplication {
     }
 
 
-    @Bean
+    /*@Bean
     CheckLoginIntercepter localInterceptor() {
         return new CheckLoginIntercepter();
-    }
+    }*/
 //
 //
 //   @Override

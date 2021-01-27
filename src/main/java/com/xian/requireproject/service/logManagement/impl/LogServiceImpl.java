@@ -27,11 +27,11 @@ public class LogServiceImpl implements LogService {
         return objectPageInfo;
     }
 
-    @Override
+    /*@Override
     public LogEntity getLogInfo(String uuid) {
 
         return logMapper.getLogInfo(uuid);
-    }
+    }*/
 
     @Override
     public void delLog(String uuid) {

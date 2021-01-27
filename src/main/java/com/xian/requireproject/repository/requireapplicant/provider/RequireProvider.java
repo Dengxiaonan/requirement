@@ -192,21 +192,21 @@ public class RequireProvider extends SQL {
  */
 public String getLogList(LogRequest logRequest) {
     String s = new SQL() {{
-        SELECT("lm.uuid,lm.log_number,lm.request_method,lm.host,lm.operation_place,lm.operation,lm.system_module,lm.operator,lm.operation_type,lm.operation_status,lm.operation_date");
+        SELECT("lm.uuid,lm.operation_time,lm.login_name,lm.operation,lm.ip,lm.describe,lm.details");
         FROM("log_management lm");
-        if (!StringUtils.isEmpty(logRequest.getSystemModule())) {
+        if (!StringUtils.isEmpty(logRequest.getLoginName())) {
             WHERE("lm.system_module LIKE concat'%'#{systemModule}'%'");
         }
-        if (!StringUtils.isEmpty(logRequest.getOperator())) {
+        if (!StringUtils.isEmpty(logRequest.getOperation())) {
             WHERE("lm.operator LIKE concat'%'#{operator}'%'");
         }
-        if (!StringUtils.isEmpty(logRequest.getOperationType())) {
+        if (!StringUtils.isEmpty(logRequest.getIp())) {
             WHERE("lm.operation_type LIKE concat'%'#{operationType}");
         }
-        if (!StringUtils.isEmpty(logRequest.getOperationStatus())) {
+        if (!StringUtils.isEmpty(logRequest.getDescribe())) {
             WHERE("lm.operation_status LIKE concat'%'#{operationStatus}");
         }
-        if (!StringUtils.isEmpty(logRequest.getOperationDate())) {
+        if (!StringUtils.isEmpty(logRequest.getDetails())) {
             WHERE("lm.operation_date LIKE concat'%'#{operationDate}");
         }
     }}.toString();
@@ -302,8 +302,7 @@ public String getLogList(LogRequest logRequest) {
                     "ra.fun_desc,\n" +
                     "ra.create_time,\n" +
                     "ra.remark,\n" +
-                    "ra.import_type,\n" +
-                    "su.user_name");
+                    "ra.import_type");
             FROM("require_applicant  ra");
             //if (requireRequest.getStatus() == null){
             WHERE("ra.status in (0 , 1 , 2)");//状态0未提交1待审批2已审批(已发布)3已退回4拒绝

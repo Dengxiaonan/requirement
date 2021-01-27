@@ -2,18 +2,18 @@ package com.xian.requireproject.service.logManagement.request;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class LogRequest {
+    private Integer logId;
     private String uuid;
-    private String logNumber;//日志编号
-    private String systemModule;//系统模块
-    private String operationType;//操作类型
-    private String requestMethod;//请求方式
-    private String operator;//操作人员
-    private String host;//主机
-    private String operationPlace;//操作地点
-    private String operationStatus;//操作状态
-    private String operationDate;//操作日期
+    private LocalDateTime operationTime;
+    private String loginName;
+    private String operation;
+    private String ip;
+    private String describe;
+    private String details;
 
 
 }
